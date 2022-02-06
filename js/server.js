@@ -12,14 +12,14 @@ MongoClient.connect('mongodb+srv://yoda:starwars13@cluster0.aq26hzx.mongodb.net/
         const quotesCollection = db.collection('quotes')
         
         app.set('view engine', 'ejs')
-        
+
 
         app.use(bodyParser.urlencoded({ extended: true}))
         
         app.get('/', (req, res) => {
             db.collection('quotes').find().toArray()
               .then(results => {
-                console.log(results)
+                res.render('index.ejs', {quotes: results})
               })
               .catch(error => console.error(error))
           })
